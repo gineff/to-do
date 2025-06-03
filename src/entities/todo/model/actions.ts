@@ -1,10 +1,10 @@
 import type { Todo } from './types';
 
-export const todoLoading = () => ({ type: 'todo/LOADING' as const });
+export const setLoading = () => ({ type: 'todo/LOADING' as const });
 
-export const todoSuccess = (list: Todo[]) => ({ type: 'todo/SUCCESS' as const, payload: list });
+export const setTodos = (list: Todo[]) => ({ type: 'todo/SUCCESS' as const, payload: list });
 
-export const todoError = (error: string) => ({ type: 'todo/ERROR' as const, payload: error });
+export const setError = (error: string) => ({ type: 'todo/ERROR' as const, payload: error });
 
 export const addTodo = (title: string) => ({ type: 'todo/ADD_TODO' as const, payload: title });
 
@@ -21,9 +21,9 @@ export const toggleAll = () => ({ type: 'todo/TOGGLE_ALL' as const });
 export const clearCompleted = () => ({ type: 'todo/CLEAR_COMPLETED' as const });
 
 export type TodoAction =
-  | ReturnType<typeof todoLoading>
-  | ReturnType<typeof todoSuccess>
-  | ReturnType<typeof todoError>
+  | ReturnType<typeof setLoading>
+  | ReturnType<typeof setTodos>
+  | ReturnType<typeof setError>
   | ReturnType<typeof addTodo>
   | ReturnType<typeof deleteTodo>
   | ReturnType<typeof editTodo>
