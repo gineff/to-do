@@ -7,7 +7,7 @@ export const TodoListWidget = () => {
   const todos = useSelector(selectTodoListFiltered);
 
   return (
-    <ul className="min-h-[24px]">
+    <ul className="min-h-[24px] my-2">
       {todos.map((todo: Todo) => (
         <TodoItem key={todo.id} todo={todo} />
       ))}
