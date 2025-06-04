@@ -1,5 +1,5 @@
-import { generateUUID } from '@/shared/lib';
 import type { TodoState, TodoAction } from './types';
+import { createTodoItem } from '../lib/create-todo-item';
 
 export const initialState: TodoState = {
   loading: false,
@@ -10,15 +10,15 @@ export const initialState: TodoState = {
 export const todoReducer = (state = initialState, action: TodoAction): TodoState => {
   switch (action.type) {
     case 'todo/LOADING':
-      return { ...state, loading: true, error: null };
-    case 'todo/SUCCESS':
+      return { ...state, loading: action.payload, error: null };
+    case 'todo/SET_TODOS':
       return { ...state, loading: false, list: action.payload, error: null };
     case 'todo/ERROR':
       return { ...state, loading: false, error: action.payload };
     case 'todo/ADD_TODO':
       return {
         ...state,
-        list: [...state.list, { id: generateUUID(), title: action.payload, completed: false }],
+        list: [...state.list,   createTodoItem(action.payload)],
       };
     case 'todo/DELETE_TODO':
       return { ...state, list: state.list.filter((todo) => todo.id !== action.payload) };
@@ -29,6 +29,7 @@ export const todoReducer = (state = initialState, action: TodoAction): TodoState
           todo.id === action.payload.id ? { ...todo, title: action.payload.title } : todo,
         ),
       };
+
     case 'todo/TOGGLE_TODO':
       return {
         ...state,
@@ -36,7 +37,7 @@ export const todoReducer = (state = initialState, action: TodoAction): TodoState
           todo.id === action.payload ? { ...todo, completed: !todo.completed } : todo,
         ),
       };
-    case 'todo/TOGGLE_ALL':
+    case 'todo/TOGGLE_ALL_TODO':
       const allCompleted = state.list.every((todo) => todo.completed);
       return {
         ...state,
@@ -44,7 +45,7 @@ export const todoReducer = (state = initialState, action: TodoAction): TodoState
           todo.completed === allCompleted ? { ...todo, completed: !allCompleted } : todo,
         ),
       };
-    case 'todo/CLEAR_COMPLETED':
+    case 'todo/CLEAR_COMPLETED_TODO':
       return {
         ...state,
         list: state.list.filter((todo) => !todo.completed),
