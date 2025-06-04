@@ -1,11 +1,10 @@
 import { selectTodoLoading, selectTodoError, selectTodoAll } from '@/entities/todo/model/selectors';
 import { fetchAllTodos } from '@/entities/todo/model/thunks';
-import type { Todo } from '@/entities/todo/model/types';
-import { TodoItem } from '@/entities/todo/ui/todo-item';
 import { useDispatch } from '@/shared/lib/store/use-dispatch';
 import { useSelector } from '@/shared/lib/store/use-selector';
 import { Spinner } from '@/shared/ui/spinner';
 import { TodoHeaderWidget } from '@/widgets/todo-header/ui/todo-header';
+import { TodoListWidget } from '@/widgets/todo-list/todo-list';
 import { useEffect } from 'react';
 
 export const TodoPage = () => {
@@ -26,9 +25,7 @@ export const TodoPage = () => {
     <div className="w-full">
       <h1 className="text-2xl font-bold mb-4">Список дел</h1>
       <TodoHeaderWidget />
-      {todos.map((todo: Todo) => (
-        <TodoItem key={todo.id} todo={todo} />
-      ))}
+      <TodoListWidget todos={todos} />
     </div>
   );
 };
