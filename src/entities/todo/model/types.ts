@@ -1,4 +1,7 @@
+export type Filter = 'all' | 'active' | 'completed';
+
 export interface TodoState {
+  filter: Filter;
   loading: boolean;
   error: string | null;
   list: Todo[];
