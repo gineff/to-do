@@ -1,6 +1,6 @@
 import { useState, type FC } from 'react';
 import type { Todo } from '../model/types';
-import { useDispatch } from '@/shared/lib/store/use-dispatch';
+import { useDispatch } from '../../../shared/lib/store/use-dispatch';
 import { updateTodo, deleteTodo } from '../model/thunks';
 
 interface TodoItemProps {
