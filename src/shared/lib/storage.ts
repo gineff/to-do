@@ -2,7 +2,7 @@ import type { Todo } from '@/entities/todo/model/types';
 import { STORAGE_KEY } from '../config';
 
 export const loadTodosFromStorage = async (): Promise<Todo[]> => {
-  await new Promise((res) => setTimeout(res, 700));
+  await new Promise((res) => setTimeout(res, 300));
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     return raw ? JSON.parse(raw) : [];

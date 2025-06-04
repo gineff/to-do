@@ -1,12 +1,12 @@
 import { TodoCounter } from './todo-counter';
 import { TodoFilter } from './todo-filter';
 import { ClearCompletedButton } from './clear-completed-button';
-import type { Filter } from '@/widgets/model/types';
 import { useDispatch } from '@/shared/lib/store/use-dispatch';
 import { setFilter } from '@/entities/todo/model/actions';
 import { useSelector } from '@/shared/lib/store/use-selector';
 import { selectTodosFilter, selectTodoActive } from '@/entities/todo/model/selectors';
 import { deleteCompletedTodosThunk } from '@/entities/todo/model/thunks';
+import type { Filter } from '@/entities/todo/model/types';
 
 export const TodoFooterWidget = () => {
   const dispatch = useDispatch();
