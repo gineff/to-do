@@ -21,5 +21,11 @@ export const TodoPage = () => {
   if (loading) return <Spinner />;
   if (error) return <div>Ошибка: {error}</div>;
 
-  return <div>{todos.map((todo: Todo) => todo.title).join(', ')}</div>;
+  return (
+    <div className="w-full">
+      {todos.map((todo: Todo) => (
+        <TodoItem key={todo.id} todo={todo} />
+      ))}
+    </div>
+  );
 };

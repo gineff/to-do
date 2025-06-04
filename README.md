@@ -47,3 +47,4 @@
   Добавлена для асинхронной загрузки задач с возможностью расширения под API
 
 - В store Добавлен thunk middleware для обработки асинхронных действий
+- Добавлен TodoItem и updateTodo deleteTodo thunks

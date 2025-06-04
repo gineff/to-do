@@ -20,16 +20,6 @@ export const todoReducer = (state = initialState, action: TodoAction): TodoState
         ...state,
         list: [...state.list,   createTodoItem(action.payload)],
       };
-    case 'todo/DELETE_TODO':
-      return { ...state, list: state.list.filter((todo) => todo.id !== action.payload) };
-    case 'todo/EDIT_TODO':
-      return {
-        ...state,
-        list: state.list.map((todo) =>
-          todo.id === action.payload.id ? { ...todo, title: action.payload.title } : todo,
-        ),
-      };
-
     case 'todo/TOGGLE_TODO':
       return {
         ...state,

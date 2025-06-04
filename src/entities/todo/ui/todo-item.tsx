@@ -1,6 +1,7 @@
 import { useState, type FC } from 'react';
 import type { Todo } from '../model/types';
 import { useDispatch } from '@/shared/lib/store/use-dispatch';
+import { updateTodo, deleteTodo } from '../model/thunks';
 
 interface TodoItemProps {
   todo: Todo;
@@ -13,19 +14,28 @@ export const TodoItem: FC<TodoItemProps> = ({ todo }) => {
   const dispatch = useDispatch();
 
   const handleToggle = () => {
-    dispatch({ type: 'todo/TOGGLE_TODO', payload: todo.id });
+    dispatch(updateTodo({ ...todo, completed: !todo.completed }));
   };
 
   const handleDelete = () => {
-    dispatch({ type: 'todo/DELETE_TODO', payload: todo.id });
+    dispatch(deleteTodo(todo.id));
   };
 
   const handleEdit = () => {
     setIsEditing(true);
   };
 
+  const handleSave = () => {
+    if (title.trim() === '') {
+      handleDelete()
+    } else {
+      dispatch(updateTodo({ ...todo, title }));
+    }
+    setIsEditing(false);
+  };
+
   const handleBlur = () => {
-    dispatch({ type: 'todo/EDIT_TODO', payload: { id: todo.id, title } });
+    handleSave();
     setIsEditing(false);
   };
 
@@ -35,7 +45,7 @@ export const TodoItem: FC<TodoItemProps> = ({ todo }) => {
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      handleBlur();
+      handleSave();
     }
     if (e.key === 'Escape') {
       setTitle(todo.title);
