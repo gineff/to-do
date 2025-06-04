@@ -48,3 +48,4 @@
 
 - В store Добавлен thunk middleware для обработки асинхронных действий
 - Добавлен TodoItem и updateTodo deleteTodo thunks
+- Добавлен TodoHeaderWidget и createTodo toggleAllTodos thunk
